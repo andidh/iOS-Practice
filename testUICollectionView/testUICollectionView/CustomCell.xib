@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomCell" customModule="testUICollectionView" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="622" height="206"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="life" translatesAutoresizingMaskIntoConstraints="NO" id="1Li-Be-Qut">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="206"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="1Li-Be-Qut" secondAttribute="height" multiplier="120:103" id="FQy-lb-JlZ"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Custom Cell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQl-dK-uVN">
+                    <rect key="frame" x="268" y="65" width="319" height="76"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="39"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="EQl-dK-uVN" secondAttribute="trailing" constant="35" id="2dX-AW-fU4"/>
+                <constraint firstAttribute="bottom" secondItem="EQl-dK-uVN" secondAttribute="bottom" constant="65" id="5Rv-hK-Gmq"/>
+                <constraint firstItem="EQl-dK-uVN" firstAttribute="leading" secondItem="1Li-Be-Qut" secondAttribute="trailing" constant="28" id="Z9L-iD-L2w"/>
+                <constraint firstItem="1Li-Be-Qut" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bUg-w5-4Cd"/>
+                <constraint firstAttribute="bottom" secondItem="1Li-Be-Qut" secondAttribute="bottom" id="iwK-rW-rss"/>
+                <constraint firstItem="EQl-dK-uVN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="65" id="nSZ-wU-ZW2"/>
+                <constraint firstItem="1Li-Be-Qut" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vJD-NR-oHp"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cellText" destination="EQl-dK-uVN" id="g9e-NG-odD"/>
+                <outlet property="image" destination="1Li-Be-Qut" id="dkd-hv-QSt"/>
+            </connections>
+            <point key="canvasLocation" x="395" y="206"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="life" width="592" height="596"/>
+    </resources>
+</document>
