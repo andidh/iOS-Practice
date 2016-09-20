@@ -10,9 +10,29 @@ import UIKit
 
 class DrawView: UIView {
 
-    var currentLine: Line?
+    var currentLines = [NSValue: Line]()
     var finishedLines = [Line]()
     
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(DrawView.doubleTapHandler(_:)))
+        doubleTapGesture.delaysTouchesBegan = true
+        doubleTapGesture.numberOfTouchesRequired = 2
+        addGestureRecognizer(doubleTapGesture)
+    }
+    
+    func doubleTapHandler(gesture: UIGestureRecognizer) {
+        
+        print("recognized")
+        
+        currentLines.removeAll(keepCapacity: false)
+        finishedLines.removeAll(keepCapacity: false)
+        
+        setNeedsDisplay()
+        
+    }
     
     func strokeLine(line: Line){
         let path = UIBezierPath()
@@ -32,7 +52,7 @@ class DrawView: UIView {
             strokeLine(line)
         }
         
-        if let line = currentLine {
+        for (_, line) in currentLines {
             //draw the current line in red
             UIColor.redColor().setStroke()
             strokeLine(line)
@@ -40,35 +60,35 @@ class DrawView: UIView {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch = touches.first!
-        
-        // get the location of the touch in the view's coordinates system
-        let location = touch.locationInView(self)
-        
-        currentLine = Line(begin: location, end: location)
+        for touch in touches {
+            let location = touch.locationInView(self)
+            let newLine = Line(begin: location, end: location)
+            let key = NSValue(nonretainedObject: touch)
+            currentLines[key] = newLine
+        }
         
         setNeedsDisplay()
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch = touches.first!
-        
-        let location = touch.locationInView(self)
-        currentLine?.end = location
-        
+       
+        for touch in touches {
+            let key = NSValue(nonretainedObject: touch)
+            currentLines[key]?.end = touch.locationInView(self)
+        }
         setNeedsDisplay()
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if var line = currentLine {
-            let touch = touches.first!
-            let location = touch.locationInView(self)
-            line.end = location
-            
-            finishedLines.append(line)
-        }
         
-        currentLine = nil
+        for touch in touches {
+            let key = NSValue(nonretainedObject: touch)
+            if var line = currentLines[key] {
+                line.end = touch.locationInView(self)
+                finishedLines.append(line)
+                currentLines.removeValueForKey(key)
+            }
+        }
         setNeedsDisplay()
     }
 }

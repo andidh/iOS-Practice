@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" id="30x-VL-y4z" customClass="SearchResultCell" customModule="StoreSearch" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="30x-VL-y4z" id="cZX-8M-o9l">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="fuo-B9-ANI">
+                        <rect key="frame" x="14" y="10" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="Dax-T2-i8l"/>
+                            <constraint firstAttribute="height" constant="60" id="H2d-zh-5IS"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eJ-4p-RMd">
+                        <rect key="frame" x="89" y="15" width="223" height="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTg-GN-nV6">
+                        <rect key="frame" x="89" y="45" width="223" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="fuo-B9-ANI" firstAttribute="centerY" secondItem="cZX-8M-o9l" secondAttribute="centerY" id="1xE-Gr-Wvo"/>
+                    <constraint firstAttribute="trailing" secondItem="0eJ-4p-RMd" secondAttribute="trailing" constant="8" id="97j-6z-MwW"/>
+                    <constraint firstItem="fuo-B9-ANI" firstAttribute="leading" secondItem="cZX-8M-o9l" secondAttribute="leading" constant="14" id="Bcy-z1-59a"/>
+                    <constraint firstItem="wTg-GN-nV6" firstAttribute="top" secondItem="0eJ-4p-RMd" secondAttribute="bottom" constant="8" id="KlD-CH-iSa"/>
+                    <constraint firstItem="0eJ-4p-RMd" firstAttribute="top" secondItem="cZX-8M-o9l" secondAttribute="top" constant="15" id="iFJ-0X-nba"/>
+                    <constraint firstItem="0eJ-4p-RMd" firstAttribute="leading" secondItem="fuo-B9-ANI" secondAttribute="trailing" constant="15" id="mty-Av-ZVx"/>
+                    <constraint firstItem="wTg-GN-nV6" firstAttribute="leading" secondItem="0eJ-4p-RMd" secondAttribute="leading" id="qZC-oI-i7O"/>
+                    <constraint firstAttribute="trailing" secondItem="wTg-GN-nV6" secondAttribute="trailing" constant="8" id="xiH-qa-Udi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="artistNameLabel" destination="wTg-GN-nV6" id="kdk-df-Vce"/>
+                <outlet property="artworkImage" destination="fuo-B9-ANI" id="Bfx-dY-lcF"/>
+                <outlet property="nameLabel" destination="0eJ-4p-RMd" id="K7U-82-Eyn"/>
+            </connections>
+            <point key="canvasLocation" x="337" y="285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Placeholder" width="60" height="60"/>
+    </resources>
+</document>
