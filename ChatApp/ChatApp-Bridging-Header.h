@@ -9,5 +9,8 @@
 #ifndef ChatApp_Bridging_Header_h
 #define ChatApp_Bridging_Header_h
 
+#import <GoogleSignIn/GoogleSignIn.h>
+
+
 
 #endif /* ChatApp_Bridging_Header_h */

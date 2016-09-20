@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuy-HE-KSj">
+                                <rect key="frame" x="218" y="275" width="165" height="50"/>
+                                <color key="backgroundColor" red="0.83510679006576538" green="0.32515230774879456" blue="0.32641065120697021" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="165" id="Kn4-a4-2lb"/>
+                                    <constraint firstAttribute="height" constant="50" id="hNo-sw-jV2"/>
+                                </constraints>
+                                <state key="normal" title="Login with Google">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Welcome to ChatApp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9Z-Ff-ohJ">
+                                <rect key="frame" x="188" y="154" width="225" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gdd-xC-XGL" customClass="GIDSignInButton">
+                                <rect key="frame" x="216" y="372" width="167" height="57"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.34901960784313724" green="0.40000000000000002" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Gdd-xC-XGL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2Eh-Ct-mb9"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Gdd-xC-XGL" secondAttribute="bottom" constant="171" id="B9E-0I-uYB"/>
+                            <constraint firstItem="P9Z-Ff-ohJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VYa-CA-gvk"/>
+                            <constraint firstItem="yuy-HE-KSj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WxW-eX-oGg"/>
+                            <constraint firstItem="yuy-HE-KSj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="evX-xn-OSG"/>
+                            <constraint firstItem="Gdd-xC-XGL" firstAttribute="trailing" secondItem="yuy-HE-KSj" secondAttribute="trailing" id="g7N-0S-SjL"/>
+                            <constraint firstItem="Gdd-xC-XGL" firstAttribute="top" secondItem="yuy-HE-KSj" secondAttribute="bottom" constant="47" id="i19-XH-u3b"/>
+                            <constraint firstItem="yuy-HE-KSj" firstAttribute="top" secondItem="P9Z-Ff-ohJ" secondAttribute="bottom" constant="91" id="w2W-py-0TK"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="535" y="423"/>
+        </scene>
+    </scenes>
+</document>

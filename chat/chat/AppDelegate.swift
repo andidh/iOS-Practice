@@ -12,26 +12,73 @@ import Firebase
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
+    var storyboard: UIStoryboard?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         FIRApp.configure()
-        FIRDatabase.database().persistenceEnabled = true
+//        FIRDatabase.database().persistenceEnabled = true
         
-
-        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID        
-        GIDSignIn.sharedInstance().signInSilently()
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
+        
+        self.storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        if FIRAuth.auth()?.currentUser != nil {
+            window?.rootViewController = storyboard?.instantiateViewControllerWithIdentifier("mainController")
+        } else {
+            window?.rootViewController = storyboard?.instantiateViewControllerWithIdentifier("loginController")
+        }
 
         return true
     }
     
     
+    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        
+        let authentication = user.authentication
+        let credential = FIRGoogleAuthProvider.credentialWithIDToken(authentication.idToken,
+                                                                     accessToken: authentication.accessToken)
+        
+        FIRAuth.auth()?.signInWithCredential(credential, completion: {
+            user, error in
+            if error != nil {
+                print("There is error")
+                return
+            }
+            print("User is logged in")
+//            self.performSegueWithIdentifier(Constants.Segues.loginToMainScreenSegue, sender: nil)
+//            
+//            // Check if the user is new, if so, create new user in DB
+            if FIRAuth.auth()?.currentUser == nil {
+                guard let uid = user?.uid else  { return }
+                let userRef = FIRDatabase.database().reference().child("users").child(uid)
+                var values: [String: String]?
+                if let image = user?.photoURL {
+                    values = [Constants.UserDBFields.name: (user?.displayName)!, Constants.UserDBFields.email : (user?.email)!, Constants.UserDBFields.photoURL : image.absoluteString ]
+                } else {
+                    values = [Constants.UserDBFields.name: (user?.displayName)!, Constants.UserDBFields.email : (user?.email)!, Constants.UserDBFields.photoURL : ""]
+                }
+                userRef.setValue(values)
+            }
+        })
+    }
     
+    
+    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user: GIDGoogleUser!, withError error: NSError!) {
+        if error != nil {
+            print(error.localizedDescription)
+        }
+        try! FIRAuth.auth()?.signOut()
+    }
 
     func application(application: UIApplication,
                      openURL url: NSURL, options: [String: AnyObject]) -> Bool {
