@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LoadingCell" id="sqb-nd-Wem">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sqb-nd-Wem" id="mD5-49-te1">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kY8-S0-Pke">
+                        <rect key="frame" x="92" y="10" width="136" height="60"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="nNF-1u-CXO">
+                                <rect key="frame" x="96" y="20" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZ4-7B-RLc">
+                                <rect key="frame" x="20" y="20" width="68" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pZ4-7B-RLc" firstAttribute="leading" secondItem="kY8-S0-Pke" secondAttribute="leading" constant="20" id="0fb-Gt-XIL"/>
+                            <constraint firstAttribute="trailing" secondItem="nNF-1u-CXO" secondAttribute="trailing" constant="20" id="3OF-wG-pp9"/>
+                            <constraint firstItem="pZ4-7B-RLc" firstAttribute="top" secondItem="kY8-S0-Pke" secondAttribute="top" constant="20" id="4GX-JP-NBk"/>
+                            <constraint firstItem="nNF-1u-CXO" firstAttribute="top" secondItem="kY8-S0-Pke" secondAttribute="top" constant="20" id="ChV-s2-GAM"/>
+                            <constraint firstAttribute="bottom" secondItem="nNF-1u-CXO" secondAttribute="bottom" constant="20" id="XHo-pg-p3g"/>
+                            <constraint firstAttribute="bottom" secondItem="pZ4-7B-RLc" secondAttribute="bottom" constant="20" id="do6-ue-UAd"/>
+                            <constraint firstItem="nNF-1u-CXO" firstAttribute="leading" secondItem="pZ4-7B-RLc" secondAttribute="trailing" constant="8" id="eQZ-Lt-09e"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="kY8-S0-Pke" firstAttribute="centerY" secondItem="mD5-49-te1" secondAttribute="centerY" id="8Bd-eo-UyQ"/>
+                    <constraint firstItem="kY8-S0-Pke" firstAttribute="centerX" secondItem="mD5-49-te1" secondAttribute="centerX" id="Rr5-GN-ubW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="378" y="355"/>
+        </tableViewCell>
+    </objects>
+</document>
