@@ -107,6 +107,7 @@
                         <outlet property="latitudeTextLabel" destination="4m9-yH-tTy" id="eoS-Mh-UBy"/>
                         <outlet property="locationButton" destination="upU-Cc-EhA" id="db2-ZH-IpX"/>
                         <outlet property="longitudeLabel" destination="6L9-Xc-9LT" id="lSR-wW-uBH"/>
+                        <outlet property="longitudeTextLabel" destination="icQ-hE-HJe" id="oDM-Wa-Wl9"/>
                         <outlet property="messageLabel" destination="lO7-JL-uS4" id="yvu-Ik-eEu"/>
                         <outlet property="tagButton" destination="nvb-Bf-A9M" id="0KX-YG-b6k"/>
                     </connections>

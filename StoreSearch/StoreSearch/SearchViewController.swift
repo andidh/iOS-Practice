@@ -45,6 +45,14 @@ class SearchViewController: UIViewController {
         searchBar.becomeFirstResponder()
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowDetail" {
+            let index = sender as! NSIndexPath
+            let controller = segue.destinationViewController as! DetailViewController
+            controller.searchResult = searchResults[index.row]
+        }
+    }
+    
     // MARK: - Class methods
     func urlWithSearchText(searchText: String, category: Int) -> NSURL {
         let entityName: String
@@ -190,7 +198,7 @@ class SearchViewController: UIViewController {
             searchResults = [SearchResult]()
             
             let url = urlWithSearchText(searchBar.text!, category: segmentedControl.selectedSegmentIndex)
-            dataTask = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            dataTask = NSURLSession.sharedSession().dataTaskWithURL(url) { data, response, error in
                 if let error = error where error.code == -999 {
                     return
                 } else if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode == 200 {
@@ -230,32 +238,6 @@ class SearchViewController: UIViewController {
         let alert = UIAlertController(title: "Whoops...", message: "There was an error reading from the iTunes Store. Please try again.", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    private func kindForDisplay(kind: String) -> String {
-        switch kind {
-        case "album":
-            return "Album"
-        case "audiobook":
-            return "Audio Book"
-        case "book":
-            return "Book"
-        case "ebook":
-            return "E-Book"
-        case "feature-movie":
-            return "Movie"
-        case "music-video":
-            return "Music Video"
-        case "podcast":
-            return "Podcast"
-        case "software":
-            return "App"
-        case "song":
-            return "Song"
-        case "tv-episode":
-            return "TV Episode"
-        default: return kind
-        }
     }
     
     // MARK: -
@@ -300,16 +282,8 @@ extension SearchViewController: UITableViewDataSource {
             return tableView.dequeueReusableCellWithIdentifier(SearchControllerConstants.nothingFoundCellIdentifier, forIndexPath: indexPath)
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(SearchControllerConstants.cellIdentifier, forIndexPath: indexPath) as! SearchResultCell
-            
-            if searchResults.isEmpty {
-                cell.nameLabel.text = "No result"
-                cell.artistNameLabel.text = ""
-            } else {
-                let searchResult = searchResults[indexPath.row]
-                cell.nameLabel.text = searchResult.name
-                let kind = kindForDisplay(searchResult.kind)
-                cell.artistNameLabel.text = String(format: "%@ (%@)", searchResult.artistName, kind)
-            }
+      
+            cell.configureCell(searchResults[indexPath.row])
             
             return cell
         }
@@ -321,6 +295,7 @@ extension SearchViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        performSegueWithIdentifier("ShowDetail", sender: indexPath)
     }
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
@@ -330,5 +305,4 @@ extension SearchViewController: UITableViewDelegate {
             return indexPath
         }
     }
-    
 }

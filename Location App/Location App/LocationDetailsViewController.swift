@@ -270,6 +270,8 @@ class LocationDetailsViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 1 {
             return imageView.hidden ? 44 : 280
+        } else if indexPath.section == 0 && indexPath.row == 0 {
+            return 88
         }
         return 44
     }
