@@ -22,6 +22,8 @@ class SearchViewController: UIViewController {
     var hasSearched = false
     var isLoading = false
     
+    var dataTask: NSURLSessionDataTask?
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -50,18 +52,7 @@ class SearchViewController: UIViewController {
         return url!
     }
     
-    func performStoreRequestWithUrl(url: NSURL) -> String? {
-        do {
-            return try String(contentsOfURL: url, encoding: NSUTF8StringEncoding)
-        } catch {
-            print(error)
-            return nil
-        }
-    }
-    
-    func parseJSON(jsonString: String) -> [String:AnyObject]? {
-        guard let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding) else { return nil }
-        
+    func parseJSON(data: NSData) -> [String:AnyObject]? {        
         do {
             return try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String:AnyObject]
         } catch {
@@ -222,26 +213,39 @@ extension SearchViewController: UISearchBarDelegate {
             searchBar.resignFirstResponder()
             
             isLoading = true
+            dataTask?.cancel()
+            
             tableView.reloadData()
+            
             hasSearched = true
             searchResults = [SearchResult]()
             
-            let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-            dispatch_async(queue, { 
-                let url = self.urlWithSearchText(searchBar.text!)
-                if let jsonString = self.performStoreRequestWithUrl(url), let dict = self.parseJSON(jsonString) {
-                    self.searchResults = self.parseDictionary(dict)
-                    self.searchResults.sortInPlace(<)
-                    dispatch_async(dispatch_get_main_queue(), { 
-                        self.isLoading = false
-                        self.tableView.reloadData()
-                    })
+            let url = urlWithSearchText(searchBar.text!)
+            dataTask = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+                if let error = error where error.code == -999 {
                     return
+                } else if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode == 200 {
+                    if let data = data, dict = self.parseJSON(data) {
+                        self.searchResults = self.parseDictionary(dict)
+                        self.searchResults.sortInPlace(<)
+                        
+                        dispatch_async(dispatch_get_main_queue()) { 
+                            self.isLoading = false
+                            self.tableView.reloadData()
+                        }
+                        return
+                    }
                 }
-            })
-            dispatch_async(dispatch_get_main_queue(), { 
-                self.showNetworkError()
-            })
+                
+                dispatch_async(dispatch_get_main_queue(), { 
+                    self.hasSearched = true
+                    self.isLoading = false
+                    self.tableView.reloadData()
+                    self.showNetworkError()
+                })
+            }
+            
+            dataTask?.resume()
         }
     }
     
