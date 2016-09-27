@@ -10,9 +10,14 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    enum AnimationStyle {
+        case Slide
+        case Fade
+    }
     // MARK: - Properties
     var searchResult: SearchResult?
     var downloadTask: NSURLSessionDownloadTask?
+    var dismissAnimationStyle = AnimationStyle.Fade
     
     // MARK: - IBOutlets
     @IBOutlet weak var popupView: UIView!
@@ -26,6 +31,7 @@ class DetailViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func close(sender: AnyObject) {
+        dismissAnimationStyle = .Slide
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func priceButtonPressed(sender: UIButton) {
@@ -40,11 +46,13 @@ class DetailViewController: UIViewController {
         
         modalPresentationStyle = .Custom
         transitioningDelegate = self
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = UIColor(red: 20/255, green: 160/255, blue: 160/255, alpha: 1)
+        view.backgroundColor = UIColor.clearColor()
         
         popupView.layer.cornerRadius = 10
         
@@ -96,10 +104,24 @@ extension DetailViewController: UIViewControllerTransitioningDelegate {
         
         return DimmingPresentationController(presentedViewController: presented, presentingViewController: presenting)
     }
+    
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return BounceAnimationController()
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        switch dismissAnimationStyle {
+        case .Slide:
+            return SlideOutAnimation()
+        case .Fade:
+            return FadeOutAnimationController()
+        }
+    }
 }
 
 extension DetailViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         return touch.view == self.view
     }
+    
 }
